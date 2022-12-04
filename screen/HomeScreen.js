@@ -104,14 +104,21 @@ class HomeScreen extends React.Component {
             <Text style={styles.headerText}>Hello</Text>
             <Text style={styles.subHeaderText}>Dhilan Cepmek</Text>
           </View>
-          <View style={{ marginTop: 50, marginRight: 24 }}>
+          <TouchableOpacity onPress={() => {
+                this.props.navigation.navigate("Edit Profil", {
+                  nama: "Dilan",
+                  alamat: "Way Huwi, Lampung Selatan, Lampungdasdasdasdasdasdasdasdasdasdasdas"
+                })
+              }
+            }
+            style={{ marginTop: 50, marginRight: 24 }}>
             <Image
               source={{
                 uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
               }}
               style={{ width: 50, height: 50, borderRadius: 50 }}
             />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder={'find your shoes'} />
