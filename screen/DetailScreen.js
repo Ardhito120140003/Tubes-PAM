@@ -1,19 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, Button, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 
 import star from '../assets/star.png';
 import back from '../assets/btn_back.png';
-
+import love from '../assets/love.png';
+import lovePress from '../assets/love_press.png';
+let num = 1;
 export default function DetailScreen({ route, navigation }) {
+  const [color, setColor] = useState(true);
   const { itemId, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct } = route.params;
   return (
     <>
       {console.log(route)}
       <ScrollView style={{ flex: 1 }}>
         <ImageBackground source={{ uri: itemImage }} style={{ marginHorizontal: 24, height: 368 }}>
-          <TouchableOpacity style={{ marginTop: 40 }} onPress={() => navigation.navigate('Home')}>
-            <Image source={back} style={{ width: 40, height: 40 }} />
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity style={{ marginTop: 40 }} onPress={() => navigation.navigate('Home')}>
+              <Image source={back} style={{ width: 40, height: 40 }} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ justifyContent: 'center', marginTop: 40 }}
+              onPress={() => {
+                num++;
+                if (num % 2 == 0) {
+                  setColor(false);
+                } else {
+                  setColor(true);
+                }
+              }}
+            >
+              <Image source={color ? love : lovePress} style={{ width: 27, height: 26 }} />
+            </TouchableOpacity>
+          </View>
         </ImageBackground>
         <View style={{ marginLeft: 24, flexDirection: 'row', justifyContent: 'space-between' }}>
           <View>

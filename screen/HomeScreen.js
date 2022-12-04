@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     position: 'absolute',
-
     alignItems: 'center',
     bottom: 10,
   },
