@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screen/HomeScreen';
+import { StatusBar } from 'react-native';
 
 import SplashScreen from './components/SplashScreen';
 import DetailScreen from './screen/DetailScreen';
@@ -10,12 +11,15 @@ import HistoryScreen from './screen/HistoryScreen';
 import RegisterScreen from './screen/RegisterScreen';
 import LoginScreen from './screen/LoginScreen';
 import EditProfile from './screen/EditProfile';
+import EditPassword from './components/EditPassword';
+import SuccesChangePassword from './components/SuccessChangePassword';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
@@ -25,6 +29,8 @@ function App() {
         <Stack.Screen name="Wishlist" component={WishlistScreen} options={{ headerShown: false }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Edit Profil" component={EditProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Edit Password" component={EditPassword} options={{ headerShown: false }} />
+        <Stack.Screen name="Change Password Success" component={SuccesChangePassword} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
