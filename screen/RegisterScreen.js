@@ -34,6 +34,7 @@ class RegisterScreen extends Component {
                         value={this.state.Password}
                         onChangeText={(value) => this.setState({ Password: value })}
                         placeholder={"Masukkan Password"}
+			secureTextEntry={true}
                     />
                 </View>
 
@@ -43,7 +44,8 @@ class RegisterScreen extends Component {
                         style={{ width: 300, paddingRight: 15 }}
                         value={this.state.ConfirmPassword}
                         onChangeText={(value) => this.setState({ ConfirmPassword: value })}
-                        placeholder={"Confirm PasswordS"}
+                        placeholder={"Confirm Password"}
+			secureTextEntry={true}
                     />
                 </View>
 
