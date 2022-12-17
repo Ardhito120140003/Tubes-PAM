@@ -78,10 +78,10 @@ export default function DetailScreen({ route, navigation }) {
           </View>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 24, justifyContent: 'space-evenly' }}>
-          <TouchableOpacity style={{ width: 164, height: 48, borderColor: '#0D4C92', borderRadius: 15, borderWidth: 2, justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity style={{ width: 164, height: 48, borderColor: '#0D4C92', borderRadius: 15, borderWidth: 2, justifyContent: 'center', alignItems: 'center' }} onPress={() => navigation.navigate('Order')}>
             <Text style={{ color: '#0D4C92' }}>Beli Sekarang</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ width: 164, height: 48, backgroundColor: '#0D4C92', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity style={{ width: 164, height: 48, backgroundColor: '#0D4C92', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }} onPress={() => navigation.navigate('Transaksi')}>
             <Text style={{ color: 'white' }}>+ Keranjang</Text>
           </TouchableOpacity>
         </View>

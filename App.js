@@ -13,6 +13,7 @@ import LoginScreen from './screen/LoginScreen';
 import EditProfile from './screen/EditProfile';
 import EditPassword from './components/EditPassword';
 import SuccesChangePassword from './components/SuccessChangePassword';
+import OrderScreen from './screen/OrderScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ function App() {
         <Stack.Screen name="Detail" component={DetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Transaksi" component={TransactionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Wishlist" component={WishlistScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Order" component={OrderScreen} options={{ headerShown: false }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Edit Profil" component={EditProfile} options={{ headerShown: false }} />
         <Stack.Screen name="Edit Password" component={EditPassword} options={{ headerShown: false }} />
