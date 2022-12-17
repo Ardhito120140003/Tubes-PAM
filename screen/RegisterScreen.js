@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
 
 class RegisterScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            Username: "",
             Email: "",
             Password: "",
             ConfirmPassword: "",
@@ -17,6 +19,17 @@ class RegisterScreen extends Component {
                 <View>
                     <Text style={styles.textHeader}>Sign Up</Text>
                 </View>
+                <Text style={styles.label}>Username*</Text>
+                <View style={styles.field}>
+                    <TextInput
+                        style={{ width: 300, paddingRight: 15 }}
+                        value={this.state.Username}
+                        onChangeText={(value) => this.setState({ Username: value })}
+                        placeholder={"Masukkan Email"}
+                        textContentType="emailAddress"
+                    />
+                </View>
+
                 <Text style={styles.label}>Email*</Text>
                 <View style={styles.field}>
                     <TextInput
@@ -24,6 +37,7 @@ class RegisterScreen extends Component {
                         value={this.state.Email}
                         onChangeText={(value) => this.setState({ Email: value })}
                         placeholder={"Masukkan Email"}
+                        textContentType="emailAddress"
                     />
                 </View>
 
@@ -51,17 +65,37 @@ class RegisterScreen extends Component {
 
                 <View style={{ marginHorizontal: 30, marginVertical: 20, padding: 5 }}>
                     <Button disabled={
+                        this.state.Username === "" ||
                         this.state.Email === "" ||
                         this.state.Password === "" ||
                         this.state.ConfirmPassword === ""
                     }
 
-                        onPress={() => this.props.navigation.navigate('Home')}
+                        onPress={() => {
+                            if (this.state.ConfirmPassword === this.state.Password) {
+                                axios.post("https://backend-uas-pam-production.up.railway.app/api/register", {
+                                    username: this.state.Username,
+                                    email: this.state.Email,
+                                    password: this.state.Password,
+                                    type: "user"
+                                })
+                                .then((response) => {
+                                    if (response.status === 200) {
+                                        this.props.navigation.navigate('Login');
+                                        alert("Registrasi Berhasil");
+                                    } 
+                                })
+                                .catch((e) => {
+                                    console.log(e.message);
+                                });
+                            } else {
+                                alert("Password yang diulang harus sama!")
+                            }
+                        }}
                         color='#0D4C92'
                         borderRadius='30'
-                        title="Sign Up" />
-
-
+                        title="Sign Up"
+                    />
                 </View>
             </View>
         );

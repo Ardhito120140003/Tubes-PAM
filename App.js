@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screen/HomeScreen';
 import { StatusBar } from 'react-native';
 
-import SplashScreen from './components/SplashScreen';
 import DetailScreen from './screen/DetailScreen';
 import TransactionScreen from './screen/TransactionScreen';
 import WishlistScreen from './screen/WishlistScreen';
@@ -14,6 +13,7 @@ import EditProfile from './screen/EditProfile';
 import EditPassword from './components/EditPassword';
 import SuccesChangePassword from './components/SuccessChangePassword';
 import OrderScreen from './screen/OrderScreen';
+import { ProfileScreen } from './screen/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +30,7 @@ function App() {
         <Stack.Screen name="Wishlist" component={WishlistScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Order" component={OrderScreen} options={{ headerShown: false }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false}} />
         <Stack.Screen name="Edit Profil" component={EditProfile} options={{ headerShown: false }} />
         <Stack.Screen name="Edit Password" component={EditPassword} options={{ headerShown: false }} />
         <Stack.Screen name="Change Password Success" component={SuccesChangePassword} options={{ headerShown: false }} />

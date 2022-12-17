@@ -30,17 +30,30 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: this.props.route.params.username,
       isLoading: true,
       dataSource: [],
+      cart: [],
     };
   }
-  async fetchData() {
-    const response = await axios.get('https://backend-uas-pam-production.up.railway.app/api/product');
-    this.setState((this.state.dataSource = response.data));
+ fetchData() {
+  // axios.all([
+  //   axios.get('https://backend-uas-pam-production.up.railway.app/api/product'),
+  //   axios.get('https://backend-uas-pam-production.up.railway.app/api/cart/' + this.state.username + '/')
+  // ])
+  // .then((response) => {
+  //   this.setState({ isLoading: false, dataSource: response[0].data, cart: response[1].data });
+  // })
+    axios.get('https://backend-uas-pam-production.up.railway.app/api/product')
+    .then((response) => {
+      this.setState({ dataSource: response.data });
+    })
+    .catch((e) => {
+      console.log(e.message);
+    });
   }
-  async componentDidMount() {
-    await this.fetchData();
-    console.log(this.state.dataSource);
+   componentDidMount() {
+      this.fetchData();
   }
   getpress = (item) => {
     this.props.navigation.navigate('Detail', {
@@ -91,15 +104,12 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <View style={styles.subContainer}>
-            <Text style={styles.headerText}>Hello</Text>
-            <Text style={styles.subHeaderText}>Dhilan Cepmek</Text>
+            <Text style={styles.headerText}>Hello,</Text>
+            <Text style={styles.subHeaderText}>{this.state.username}!</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
-              this.props.navigation.navigate('Edit Profil', {
-                nama: 'Dilan',
-                alamat: 'Way Huwi, Lampung Selatan, Lampungdasdasdasdasdasdasdasdasdasdasdas',
-              });
+              this.props.navigation.navigate('Profile', { username: this.state.username });
             }}
             style={{ marginTop: 50, marginRight: 24 }}
           >

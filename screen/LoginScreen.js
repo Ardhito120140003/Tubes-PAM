@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import axios from 'axios';
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Email: "",
-      Password: "",
+      username: "",
+      password: "",
     };
   }
 
@@ -16,13 +17,13 @@ class LoginScreen extends Component {
         <View>
           <Text style={styles.textHeader}>Login</Text>
         </View>
-        <Text style={styles.label}>Email*</Text>
+        <Text style={styles.label}>Username*</Text>
         <View style={styles.field}>
           <TextInput
             style={{ width: 300, paddingRight: 15 }}
-            value={this.state.Email}
-            onChangeText={(value) => this.setState({ Email: value })}
-            placeholder={"Masukkan Email"}
+            value={this.state.username}
+            onChangeText={(value) => this.setState({ username: value })}
+            placeholder={"Masukkan username"}
           />
         </View>
 
@@ -31,19 +32,34 @@ class LoginScreen extends Component {
           <TextInput
             style={{ width: 300, paddingRight: 15 }}
             value={this.state.Password}
-            onChangeText={(value) => this.setState({ Password: value })}
-            placeholder={"Masukkan Password"}
+            onChangeText={(value) => this.setState({ password: value })}
+            placeholder={"Masukkan password"}
 	    secureTextEntry={true}
           />
         </View>
 
         <View style={{ marginHorizontal: 30, marginVertical: 20, padding: 5 }}>
           <Button disabled={
-            this.state.Email === "" ||
-            this.state.Password === ""
+            this.state.username === "" ||
+            this.state.password === ""
           }
 
-            onPress={() => this.props.navigation.navigate('Home')}
+            onPress={() => {
+              axios.post("https://backend-uas-pam-production.up.railway.app/api/login", {
+                username: this.state.username,
+                password: this.state.password
+              })
+              .then(response => {
+                if (response.status === 200) {
+                  this.props.navigation.navigate("Home", { username: this.state.username })
+                }
+              })
+              .catch((e) => {
+                  alert("Username atau Password salah!");
+                  console.error(e.message);
+              });
+              // this.props.navigation.navigate('Home', { username: "Dilan" });
+            }}
             color='#0D4C92'
             borderRadius='30'
             title="Login" />
