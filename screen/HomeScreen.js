@@ -52,7 +52,7 @@ class HomeScreen extends React.Component {
       itemTypeProduct: item.typeProduct,
     });
   };
-  _renderItem = ({ item, index, onPress }) => {
+  _renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
         style={{ marginBottom: 10, marginLeft: 24, flexDirection: 'row' }}
