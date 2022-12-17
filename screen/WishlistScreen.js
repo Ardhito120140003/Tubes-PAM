@@ -8,7 +8,7 @@ import star from '../assets/star.png';
 import home from '../assets/home_npress.png';
 import transaksi from '../assets/transaksi.png';
 import history from '../assets/history.png';
-import love from '../assets/love.png';
+import love from '../assets/love_press.png';
 import lovePress from '../assets/love_press.png';
 
 const shoesData = [
@@ -74,7 +74,7 @@ const renderItem = ({ item }) => (
       <Text style={{ fontWeight: '700', marginBottom: 4, fontSize: 16 }}>{item.name}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
         <View>
-          <Text style={{ fontWeight: '500', marginRight: 25, marginBottom: 16, color: '#5843BE' }}>{item.price}</Text>
+          <Text style={{ fontWeight: '500', marginRight: 50, marginBottom: 16, color: '#5843BE' }}>{item.price}</Text>
           <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.type}</Text>
         </View>
         <View>

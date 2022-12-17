@@ -19,34 +19,6 @@ function TransactionScreen({ route, navigation }) {
   shoesData.push(route.params);
   console.log(shoesData);
 
-  const renderItem = ({ item }) => (
-    <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>
-      <ImageBackground source={{ uri: item.itemImage }} style={{ width: 130, height: 110 }}>
-        <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <Image source={star} style={{ width: 18, height: 18, marginTop: 4 }} />
-          <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.itemRating}</Text>
-        </View>
-      </ImageBackground>
-      <View style={{ flexDirection: 'column', marginLeft: 20 }}>
-        <Text style={{ fontWeight: '700', marginBottom: 4, fontSize: 16 }}>{item.id}</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-          <View>
-            <Text style={{ fontWeight: '500', marginRight: 15, marginBottom: 16, color: '#5843BE' }}>{item.itemPrice}</Text>
-            <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.itemGender}</Text>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity onPress={null} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={minus} style={{ width: 20, height: 20 }} />
-            </TouchableOpacity>
-            <Text style={{ marginTop: 13 }}>1</Text>
-            <TouchableOpacity onPress={null} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={plus} style={{ width: 20, height: 20 }} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -91,6 +63,21 @@ function TransactionScreen({ route, navigation }) {
       </View>
     </View>
   );
+}
+
+export function JumlahItem() {
+  const[jumlah,ubahJumlah]=useState(1)
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={()=>ubahJumlah(jumlah-1)} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+        <Image source={minus} style={{ width: 20, height: 20 }} />
+      </TouchableOpacity>
+      <Text style={{ marginTop: 13 }}>{jumlah}</Text>
+      <TouchableOpacity onPress={()=>ubahJumlah(jumlah+1)} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+        <Image source={plus} style={{ width: 20, height: 20 }} />
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
