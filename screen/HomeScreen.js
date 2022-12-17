@@ -17,24 +17,6 @@ import history from '../assets/history.png';
 import love from '../assets/love.png';
 import DetailScreen from './DetailScreen';
 
-function RenderItem({ item, onPress }) {
-  return (
-    <TouchableOpacity style={{ marginBottom: 10, marginLeft: 24, flexDirection: 'row' }} onPress={() => onPress(item)}>
-      <ImageBackground source={{ uri: item.image }} style={{ width: 130, height: 110 }}>
-        <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <Image source={star} style={{ width: 18, height: 18, marginTop: 4 }} />
-          <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.rating}</Text>
-        </View>
-      </ImageBackground>
-      <View style={{ flexDirection: 'column', marginLeft: 20 }}>
-        <Text style={{ fontWeight: '500', marginBottom: 4 }}>{item.name}</Text>
-        <Text style={{ fontWeight: '500', marginBottom: 16, color: '#5843BE' }}>{item.price}</Text>
-        <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.type}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-}
-
 const getItem = (item) => {
   // Function for click on an item
   alert('Id : ' + item.id + ' Title : ' + item.position);
