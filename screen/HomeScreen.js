@@ -40,10 +40,12 @@ class HomeScreen extends React.Component {
   }
   async componentDidMount() {
     await this.fetchData();
+    console.log(this.state.dataSource);
   }
   getpress = (item) => {
     this.props.navigation.navigate('Detail', {
-      itemId: item.name,
+      id: item.id,
+      itemName: item.name,
       itemImage: item.image,
       itemPrice: item.price,
       itemDetail: item.detail,
@@ -52,7 +54,7 @@ class HomeScreen extends React.Component {
       itemTypeProduct: item.typeProduct,
     });
   };
-  _renderItem = ({ item, index }) => {
+  _renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         style={{ marginBottom: 10, marginLeft: 24, flexDirection: 'row' }}
@@ -63,6 +65,7 @@ class HomeScreen extends React.Component {
             itemPrice: item.price,
             itemDetail: item.detail,
             itemRating: item.rating,
+            itemGender: item.type,
             itemNameProduct: item.nameProduct,
             itemTypeProduct: item.typeProduct,
           })
@@ -84,7 +87,6 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    console.info(this.state.dataSource);
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -141,7 +143,7 @@ class HomeScreen extends React.Component {
         </View>
 
         <ScrollView style={{ marginTop: 20 }}>
-          <FlatList data={this.state.dataSource} renderItem={this._renderItem} keyExtractor={(item, index) => index.toString()} ListFooterComponent={<BottomFlatList />} />
+          <FlatList data={this.state.dataSource} renderItem={this._renderItem} ListFooterComponent={<BottomFlatList />} />
         </ScrollView>
 
         <View style={styles.navContainer}>
