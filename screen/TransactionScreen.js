@@ -78,14 +78,8 @@ const renderItem = ({ item }) => (
           <Text style={{ fontWeight: '500', marginRight: 15, marginBottom: 16, color: '#5843BE' }}>{item.price}</Text>
           <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.type}</Text>
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={null} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-            <Image source={minus} style={{ width: 20, height: 20 }} />
-          </TouchableOpacity>
-          <Text style={{ marginTop: 13 }}>1</Text>
-          <TouchableOpacity onPress={null} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-            <Image source={plus} style={{ width: 20, height: 20 }} />
-          </TouchableOpacity>
+        <View >
+          <JumlahItem/>
         </View>
       </View>
     </View>
@@ -149,6 +143,21 @@ class TransactionScreen extends React.Component {
       </View>
     );
   }
+}
+
+export function JumlahItem() {
+  const[jumlah,ubahJumlah]=useState(1)
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={()=>ubahJumlah(jumlah-1)} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+        <Image source={minus} style={{ width: 20, height: 20 }} />
+      </TouchableOpacity>
+      <Text style={{ marginTop: 13 }}>{jumlah}</Text>
+      <TouchableOpacity onPress={()=>ubahJumlah(jumlah+1)} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+        <Image source={plus} style={{ width: 20, height: 20 }} />
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
