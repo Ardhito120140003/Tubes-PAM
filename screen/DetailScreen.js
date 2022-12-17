@@ -8,7 +8,7 @@ import lovePress from '../assets/love_press.png';
 let num = 1;
 export default function DetailScreen({ route, navigation }) {
   const [color, setColor] = useState(true);
-  const { itemId, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct } = route.params;
+  const { itemId, itemName, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct, itemGender } = route.params;
   return (
     <>
       {console.log(route)}
@@ -81,7 +81,21 @@ export default function DetailScreen({ route, navigation }) {
           <TouchableOpacity style={{ width: 164, height: 48, borderColor: '#0D4C92', borderRadius: 15, borderWidth: 2, justifyContent: 'center', alignItems: 'center' }} onPress={() => navigation.navigate('Order')}>
             <Text style={{ color: '#0D4C92' }}>Beli Sekarang</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ width: 164, height: 48, backgroundColor: '#0D4C92', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }} onPress={() => navigation.navigate('Transaksi')}>
+          <TouchableOpacity
+            style={{ width: 164, height: 48, backgroundColor: '#0D4C92', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+            onPress={() =>
+              navigation.navigate('Transaksi', {
+                id: itemId,
+                itemName: itemName,
+                itemImage: itemImage,
+                itemPrice: itemPrice,
+                itemDetail: itemImage,
+                itemRating: itemRating,
+                itemGender: itemGender,
+                itemTypeProduct: itemTypeProduct,
+              })
+            }
+          >
             <Text style={{ color: 'white' }}>+ Keranjang</Text>
           </TouchableOpacity>
         </View>
