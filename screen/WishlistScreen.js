@@ -49,15 +49,15 @@ class WishlistScreen extends React.Component {
 
   fetchData() {
     axios.all([axios.get('https://backend-uas-pam-production.up.railway.app/api/product'), axios.get('https://backend-uas-pam-production.up.railway.app/api/wishlist/' + this.state.username)]).then((response) => {
-      this.setState({ dataSource: response[0].data, wishlist: response[1].data }).then(() => {
-        const result = this.state.dataSource.filter((el) => {
-          return this.state.wishlist.find((element) => {
-            return element == el.id;
-          });
+      this.setState({ dataSource: response[0].data, wishlist: response[1].data });
+      const result = this.state.dataSource.filter((el) => {
+        return this.state.wishlist.find((element) => {
+          console.log(element == el.id);
+          return element == el.id;
         });
-        this.setState({ dataSource: result });
-        console.log(this.state.dataSource);
       });
+      this.setState({ dataSource: result });
+      console.log(this.state.dataSource);
     });
   }
 

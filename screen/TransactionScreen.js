@@ -19,23 +19,24 @@ function TransactionScreen({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("https://backend-uas-pam-production.up.railway.app/api/cart/" + username)
-    .then((response) => {
-      let idx = response.data;
-      const result = shoes.filter(el => {
-        return idx.find(element => {
-           return element.id === el.id;
+    axios
+      .get('https://backend-uas-pam-production.up.railway.app/api/cart/' + username)
+      .then((response) => {
+        let idx = response.data;
+        const result = shoes.filter((el) => {
+          return idx.find((element) => {
+            return element.id === el.id;
+          });
         });
-     });
-      setCartShoes(result);
-    })
-    .catch((e) => {
-      console.error(e.message)
-    });
+        setCartShoes(result);
+      })
+      .catch((e) => {
+        console.error(e.message);
+      });
     console.log(cartShoes);
-  })
+  });
 
-  const renderItem = ({ item }) => ( 
+  const renderItem = ({ item }) => (
     <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>
       <ImageBackground source={{ uri: item.image }} style={{ width: 130, height: 110 }}>
         <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
@@ -69,9 +70,12 @@ function TransactionScreen({ route, navigation }) {
         <View style={{ marginLeft: 135, marginTop: 39 }}>
           <Text style={{ fontSize: 18, fontWeight: '700' }}>KERANJANG</Text>
         </View>
-        <TouchableOpacity style={{ marginTop: 26, marginRight: 24 }} onPress={() => {
-              this.props.navigation.navigate('Profile', { username: this.state.username });
-            }}>
+        <TouchableOpacity
+          style={{ marginTop: 26, marginRight: 24 }}
+          onPress={() => {
+            this.props.navigation.navigate('Profile', { username: this.state.username });
+          }}
+        >
           <Image
             source={{
               uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
@@ -127,8 +131,8 @@ const styles = StyleSheet.create({
     height: 39,
     bottom: 70,
     borderRadius: 15,
-    alignSelf:"center",
-    marginBottom:10
+    alignSelf: 'center',
+    marginBottom: 10,
   },
   navContainer: {
     position: 'absolute',
