@@ -34,8 +34,11 @@ class HomeScreen extends React.Component {
       isLoading: true,
       dataSource: [],
       cart: [],
+      query: '',
+      fullData: [],
     };
   }
+<<<<<<< HEAD
  fetchData() {
     axios.get('https://backend-uas-pam-production.up.railway.app/api/product')
     .then((response) => {
@@ -44,10 +47,30 @@ class HomeScreen extends React.Component {
     .catch((e) => {
       console.log(e.message);
     });
+=======
+  fetchData() {
+    // axios.all([
+    //   axios.get('https://backend-uas-pam-production.up.railway.app/api/product'),
+    //   axios.get('https://backend-uas-pam-production.up.railway.app/api/cart/' + this.state.username + '/')
+    // ])
+    // .then((response) => {
+    //   this.setState({ isLoading: false, dataSource: response[0].data, cart: response[1].data });
+    // })
+    axios
+      .get('https://backend-uas-pam-production.up.railway.app/api/product')
+      .then((response) => {
+        this.setState({ dataSource: response.data });
+        this.setState({ fullData: response.data });
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+>>>>>>> 0ed3792ae5aeb464b58b1bc8a7744e75e163020c
   }
-   componentDidMount() {
-      this.fetchData();
+  componentDidMount() {
+    this.fetchData();
   }
+
   getpress = (item) => {
     this.props.navigation.navigate('Detail', {
       id: item.id,
@@ -114,12 +137,14 @@ class HomeScreen extends React.Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder={'find your shoes'} />
-          <View style={{ marginTop: 35, marginRight: 24 }}>
+        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => this.props.navigation.navigate('Search')}>
+          <View style={styles.input}>
+            <Text style={{ color: '#7A7E86' }}>find your shoes</Text>
+          </View>
+          <View style={{ marginTop: 25, marginRight: 24 }}>
             <Feather name="search" size={20} color="black" style={{ marginLeft: 1 }} />
           </View>
-        </View>
+        </TouchableOpacity>
         <Text style={styles.subHeaderText2}>Most Famous Brands</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 24 }}>
           <TouchableOpacity style={{ backgroundColor: '#0D4C92', width: 101, height: 126.25, borderRadius: 18, marginLeft: 24 }}>
