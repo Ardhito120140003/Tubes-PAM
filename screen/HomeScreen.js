@@ -38,7 +38,6 @@ class HomeScreen extends React.Component {
       fullData: [],
     };
   }
-<<<<<<< HEAD
  fetchData() {
     axios.get('https://backend-uas-pam-production.up.railway.app/api/product')
     .then((response) => {
@@ -47,25 +46,6 @@ class HomeScreen extends React.Component {
     .catch((e) => {
       console.log(e.message);
     });
-=======
-  fetchData() {
-    // axios.all([
-    //   axios.get('https://backend-uas-pam-production.up.railway.app/api/product'),
-    //   axios.get('https://backend-uas-pam-production.up.railway.app/api/cart/' + this.state.username + '/')
-    // ])
-    // .then((response) => {
-    //   this.setState({ isLoading: false, dataSource: response[0].data, cart: response[1].data });
-    // })
-    axios
-      .get('https://backend-uas-pam-production.up.railway.app/api/product')
-      .then((response) => {
-        this.setState({ dataSource: response.data });
-        this.setState({ fullData: response.data });
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
->>>>>>> 0ed3792ae5aeb464b58b1bc8a7744e75e163020c
   }
   componentDidMount() {
     this.fetchData();
