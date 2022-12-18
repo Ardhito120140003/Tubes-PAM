@@ -15,7 +15,19 @@ import lovePress from '../assets/love_press.png';
 const renderItem = ({ item }) => (
   <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>
     <ImageBackground source={{ uri: item.image }} style={{ width: 130, height: 110 }}>
-      <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
+      <View
+        style={{
+          backgroundColor: '#0D4C92',
+          width: 70,
+          height: 30,
+          borderBottomLeftRadius: 50,
+          borderTopRightRadius: 50,
+          position: 'absolute',
+          left: 50,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+        }}
+      >
         <Image source={star} style={{ width: 18, height: 18, marginTop: 4 }} />
         <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.rating}</Text>
       </View>
@@ -24,7 +36,16 @@ const renderItem = ({ item }) => (
       <Text style={{ fontWeight: '700', marginBottom: 4, fontSize: 16 }}>{item.name}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
         <View>
-          <Text style={{ fontWeight: '500', marginRight: 50, marginBottom: 16, color: '#5843BE' }}>{item.price}</Text>
+          <Text
+            style={{
+              fontWeight: '500',
+              marginRight: 50,
+              marginBottom: 16,
+              color: '#5843BE',
+            }}
+          >
+            {item.price}
+          </Text>
           <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.type}</Text>
         </View>
         <View>
@@ -48,17 +69,23 @@ class WishlistScreen extends React.Component {
   }
 
   fetchData() {
-    axios.all([axios.get('https://backend-uas-pam-production.up.railway.app/api/product'), axios.get('https://backend-uas-pam-production.up.railway.app/api/wishlist/' + this.state.username)]).then((response) => {
-      this.setState({ dataSource: response[0].data, wishlist: response[1].data });
-      const result = this.state.dataSource.filter((el) => {
-        return this.state.wishlist.find((element) => {
-          console.log(element == el.id);
-          return element == el.id;
+    axios
+      .all([axios.get('https://backend-uas-pam-production.up.railway.app/api/product'), axios.get('https://backend-uas-pam-production.up.railway.app/api/wishlist/' + this.state.username)])
+      .then((response) => {
+        this.setState({
+          dataSource: response[0].data,
+          wishlist: response[1].data,
         });
+      })
+      .then((response) => {
+        const result = this.state.dataSource.filter((el) => {
+          return this.state.wishlist.find((element) => {
+            return element == el.id;
+          });
+        });
+        this.setState({ dataSource: result });
+        console.log(result);
       });
-      this.setState({ dataSource: result });
-      console.log(this.state.dataSource);
-    });
   }
 
   componentDidMount() {
@@ -75,7 +102,9 @@ class WishlistScreen extends React.Component {
           <TouchableOpacity
             style={{ marginTop: 26, marginRight: 24 }}
             onPress={() => {
-              this.props.navigation.navigate('Profile', { username: this.state.username });
+              this.props.navigation.navigate('Profile', {
+                username: this.state.username,
+              });
             }}
           >
             <Image
