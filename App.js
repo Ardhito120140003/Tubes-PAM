@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screen/HomeScreen';
 import { StatusBar } from 'react-native';
+import SplashScreen from './compoenents/SplashScreen';
 
 import DetailScreen from './screen/DetailScreen';
 import TransactionScreen from './screen/TransactionScreen';
@@ -21,6 +22,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
+      <SplashScreen />
       <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
