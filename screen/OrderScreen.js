@@ -54,7 +54,7 @@ class OrderScreen extends React.Component {
   render() {
     return (
       <ScrollView>
-        <View style={{marginLeft: 24}}>
+        <View style={{ marginLeft: 24 }}>
           <TouchableOpacity style={{ marginTop: 40 }} onPress={() => this.props.navigation.navigate('Home')}>
             <Image source={back} style={{ width: 40, height: 40 }} />
           </TouchableOpacity>
@@ -69,11 +69,7 @@ class OrderScreen extends React.Component {
         <View>
           <Text style={styles.label}>Alamat</Text>
           <View style={styles.field}>
-            <TextInput
-              style={{ width: 300, paddingRight: 15, paddingBottom: 50 }}
-              onChangeText={null}
-              placeholder={"Alamat"}
-            />
+            <TextInput style={{ width: 300, paddingRight: 15, paddingBottom: 50 }} onChangeText={null} placeholder={'Alamat'} />
             <TouchableOpacity>
               <Image source={location} style={{ width: 40, height: 40, marginLeft: 240 }} />
             </TouchableOpacity>
@@ -99,19 +95,18 @@ class OrderScreen extends React.Component {
           </View>
         </View>
 
-        <View style={{ alignItems: "center", marginTop: 30 }}>
-          <TouchableOpacity onPress={null} style={styles.button}>
+        <View style={{ alignItems: 'center', marginTop: 30 }}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} style={styles.button}>
             <Text style={{ marginTop: 6, fontSize: 20, color: 'white', fontWeight: 'bold' }}>Buat Pesanan</Text>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     );
   }
 }
 
 export function JumlahItem() {
-  const [jumlah, ubahJumlah] = useState(1)
+  const [jumlah, ubahJumlah] = useState(1);
   return (
     <View style={{ flexDirection: 'row' }}>
       <TouchableOpacity onPress={() => ubahJumlah(jumlah - 1)} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
@@ -122,7 +117,7 @@ export function JumlahItem() {
         <Image source={plus} style={{ width: 20, height: 20 }} />
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -150,12 +145,12 @@ const styles = StyleSheet.create({
     padding: 7,
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: '#0D4C92',
     width: 300,
     height: 39,
     borderRadius: 10,
-  }
+  },
 });
 
 export default OrderScreen;

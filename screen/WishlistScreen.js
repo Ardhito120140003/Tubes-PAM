@@ -74,8 +74,9 @@ class WishlistScreen extends React.Component {
       .then((response) => {
         this.setState({
           dataSource: response[0].data,
-          wishlist: response[1].data,
+          wishlist: response[1].data.wishItem,
         });
+        console.log(this.state.wishlist);
       })
       .then((response) => {
         const result = this.state.dataSource.filter((el) => {
