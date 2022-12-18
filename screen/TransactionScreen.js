@@ -14,26 +14,40 @@ import plus from '../assets/plus.png';
 import minus from '../assets/minus.png';
 
 function TransactionScreen({ route, navigation }) {
-  const { username, shoes } = route.params;
+  const { username } = route.params;
   const [cartShoes, setCartShoes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  cosnt [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get("https://backend-uas-pam-production.up.railway.app/api/cart/" + username)
-    .then((response) => {
-      let idx = response.data;
-      const result = shoes.filter(el => {
-        return idx.find(element => {
-           return element.id === el.id;
+    axios
+			.all([
+				axios.get(
+					"https://backend-uas-pam-production.up.railway.app/api/product"
+				),
+				axios.get(
+					"https://backend-uas-pam-production.up.railway.app/api/cart/" +
+						route.params.username
+				),
+			])
+			.then((response) => {
+        setCartShoes(response[0].data);
+        setCart(response[1].data);
+        console.log(cart);
+			})
+      .then((response) => {
+        const result = cartShoes.filter((el) => {
+          return this.state.wishlist.find((element) => {
+            return element == el.id;
+          });
         });
-     });
-      setCartShoes(result);
-    })
-    .catch((e) => {
-      console.error(e.message)
-    });
-    console.log(cartShoes);
-  })
+        setCartShoes(result);
+      })
+      .catch((e) => {
+        console.error(e.message)
+      });
+      console.log(cartShoes);
+  });
+
 
   const renderItem = ({ item }) => ( 
     <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>

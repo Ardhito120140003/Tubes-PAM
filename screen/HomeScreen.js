@@ -285,14 +285,14 @@ class HomeScreen extends React.Component {
 							<Image source={transaksi} style={{ width: 18, height: 24 }} />
 						</TouchableOpacity>
 						<TouchableOpacity
-							onPress={() => this.props.navigation.navigate("History")}
+							onPress={() => this.props.navigation.navigate("History", { username: this.state.username })}
 							style={styles.icon}
 							android_riple={{ borderless: true, radius: 50 }}
 						>
 							<Image source={history} style={{ width: 27, height: 27 }} />
 						</TouchableOpacity>
 						<TouchableOpacity
-							onPress={() => this.props.navigation.navigate("Wishlist")}
+							onPress={() => this.props.navigation.navigate("Wishlist", { username: this.state.username })}
 							style={styles.icon}
 							android_riple={{ borderless: true, radius: 50 }}
 						>
