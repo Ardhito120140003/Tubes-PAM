@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, TextInput, FlatList, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import React, { useState, state } from 'react';
+import _ from 'lodash';
 import { Feather } from '@expo/vector-icons';
 
 import search from '../assets/Vector.png';
@@ -17,20 +18,14 @@ import history from '../assets/history.png';
 import love from '../assets/love.png';
 import DetailScreen from './DetailScreen';
 
-const getItem = (item) => {
-  // Function for click on an item
-  alert('Id : ' + item.id + ' Title : ' + item.position);
-};
-
 const BottomFlatList = () => {
   return <View style={{ marginTop: 50 }}></View>;
 };
 
-class HomeScreen extends React.Component {
+class SeacrhBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.route.params.username,
       isLoading: true,
       dataSource: [],
       cart: [],
@@ -59,6 +54,16 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     this.fetchData();
   }
+  handleSearch = (text) => {
+    const formattedQuery = text;
+    const dataSource = _.filter(this.state.fullData, (data) => {
+      if (data.name.includes(formattedQuery)) {
+        return true;
+      }
+      return false;
+    });
+    this.setState({ dataSource, query: text });
+  };
 
   getpress = (item) => {
     this.props.navigation.navigate('Detail', {
@@ -103,82 +108,23 @@ class HomeScreen extends React.Component {
       </TouchableOpacity>
     );
   };
+  renderHeader = () => {
+    return (
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 24 }}>
+        <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder={'find your shoes'} onChangeText={this.handleSearch} status="info" />
+        <View style={{ marginTop: 35, marginRight: 24 }}>
+          <Feather name="search" size={20} color="black" style={{ marginLeft: 1 }} />
+        </View>
+      </View>
+    );
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <View style={styles.subContainer}>
-            <Text style={styles.headerText}>Hello,</Text>
-            <Text style={styles.subHeaderText}>{this.state.username}!</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('Profile', { username: this.state.username });
-            }}
-            style={{ marginTop: 50, marginRight: 24 }}
-          >
-            <Image
-              source={{
-                uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
-              }}
-              style={{ width: 50, height: 50, borderRadius: 50 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => this.props.navigation.navigate('Search')}>
-          <View style={styles.input}>
-            <Text style={{ color: '#7A7E86' }}>find your shoes</Text>
-          </View>
-          <View style={{ marginTop: 25, marginRight: 24 }}>
-            <Feather name="search" size={20} color="black" style={{ marginLeft: 1 }} />
-          </View>
-        </TouchableOpacity>
-        <Text style={styles.subHeaderText2}>Most Famous Brands</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 24 }}>
-          <TouchableOpacity style={{ backgroundColor: '#0D4C92', width: 101, height: 126.25, borderRadius: 18, marginLeft: 24 }}>
-            <Image source={puma} style={{ width: 101, height: 95 }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'center', width: 101, padding: 3 }}>
-              <Text style={styles.brandFont}>Puma</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={{ backgroundColor: '#0D4C92', width: 101, height: 126.25, borderRadius: 18 }}>
-            <Image source={nike} style={{ width: 101, height: 95 }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'center', width: 101, padding: 3 }}>
-              <Text style={styles.brandFont}>Nike</Text>
-            </View>
-          </View>
-          <View style={{ backgroundColor: '#0D4C92', width: 101, height: 126.25, borderRadius: 18, marginRight: 24 }}>
-            <Image source={adidas} style={{ width: 101, height: 95 }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'center', width: 101, padding: 3 }}>
-              <Text style={styles.brandFont}>Adidas</Text>
-            </View>
-          </View>
-        </View>
-        <View style={{ marginLeft: 24, marginTop: 24 }}>
-          <Text style={{ fontSize: 16, fontWeight: '600' }}>Recommended Space</Text>
-        </View>
-
         <ScrollView style={{ marginTop: 20 }}>
-          <FlatList data={this.state.dataSource} renderItem={this._renderItem} ListFooterComponent={<BottomFlatList />} />
+          <FlatList data={this.state.dataSource} renderItem={this._renderItem} ListFooterComponent={<BottomFlatList />} ListHeaderComponent={this.renderHeader} />
         </ScrollView>
-
-        <View style={styles.navContainer}>
-          <View style={styles.navBar}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={home} style={{ width: 24.66, height: 22.58 }} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={transaksi} style={{ width: 18, height: 24 }} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={history} style={{ width: 27, height: 27 }} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Wishlist')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
-              <Image source={love} style={{ width: 27, height: 27 }} />
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
     );
   }
@@ -233,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default SeacrhBar;
