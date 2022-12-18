@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screen/HomeScreen';
 import { StatusBar } from 'react-native';
-import SplashScreen from './compoenents/SplashScreen';
+import SplashScreen from './components/SplashScreen';
 
 import DetailScreen from './screen/DetailScreen';
 import TransactionScreen from './screen/TransactionScreen';
