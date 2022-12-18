@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TextInput, FlatList, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
-import React, { useState, state } from 'react';
+import React, { useState, state, useEffect } from 'react';
+import axios from 'axios';
 
 import nikeAirMax from '../assets/NikeAir.png';
 import nikewaffle from '../assets/nikeWaffle.png';
@@ -12,27 +13,42 @@ import love from '../assets/love.png';
 import plus from '../assets/plus.png';
 import minus from '../assets/minus.png';
 
-const shoesData = [];
-
 function TransactionScreen({ route, navigation }) {
-  const { itemId, itemName, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct, itemGender } = route.params;
-  shoesData.push(route.params);
-  console.log(shoesData);
+  const { username, shoes } = route.params;
+  const [cartShoes, setCartShoes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const renderItem = ({ item }) => (
+  useEffect(() => {
+    axios.get("https://backend-uas-pam-production.up.railway.app/api/cart/" + username)
+    .then((response) => {
+      let idx = response.data;
+      const result = shoes.filter(el => {
+        return idx.find(element => {
+           return element.id === el.id;
+        });
+     });
+      setCartShoes(result);
+    })
+    .catch((e) => {
+      console.error(e.message)
+    });
+    console.log(cartShoes);
+  })
+
+  const renderItem = ({ item }) => ( 
     <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>
-      <ImageBackground source={{ uri: item.itemImage }} style={{ width: 130, height: 110 }}>
+      <ImageBackground source={{ uri: item.image }} style={{ width: 130, height: 110 }}>
         <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
           <Image source={star} style={{ width: 18, height: 18, marginTop: 4 }} />
-          <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.itemRating}</Text>
+          <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.rating}</Text>
         </View>
       </ImageBackground>
       <View style={{ flexDirection: 'column', marginLeft: 20 }}>
-        <Text style={{ fontWeight: '700', marginBottom: 4, fontSize: 16 }}>{item.id}</Text>
+        <Text style={{ fontWeight: '700', marginBottom: 4, fontSize: 16 }}>{item.name}</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
           <View>
             <Text style={{ fontWeight: '500', marginRight: 15, marginBottom: 16, color: '#5843BE' }}>{item.itemPrice}</Text>
-            <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.itemGender}</Text>
+            <Text style={{ fontWeight: '400', marginBottom: 4, color: '#7A7E86' }}>{item.type}</Text>
           </View>
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={null} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
@@ -64,7 +80,7 @@ function TransactionScreen({ route, navigation }) {
       </View>
 
       <ScrollView style={{ marginTop: 20 }}>
-        <FlatList data={shoesData} renderItem={renderItem} />
+        <FlatList data={cartShoes} renderItem={renderItem} />
       </ScrollView>
 
       <View>

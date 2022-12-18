@@ -58,7 +58,6 @@ class LoginScreen extends Component {
                   alert("Username atau Password salah!");
                   console.error(e.message);
               });
-              // this.props.navigation.navigate('Home', { username: "Dilan" });
             }}
             color='#0D4C92'
             borderRadius='30'

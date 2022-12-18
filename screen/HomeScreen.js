@@ -37,13 +37,6 @@ class HomeScreen extends React.Component {
     };
   }
  fetchData() {
-  // axios.all([
-  //   axios.get('https://backend-uas-pam-production.up.railway.app/api/product'),
-  //   axios.get('https://backend-uas-pam-production.up.railway.app/api/cart/' + this.state.username + '/')
-  // ])
-  // .then((response) => {
-  //   this.setState({ isLoading: false, dataSource: response[0].data, cart: response[1].data });
-  // })
     axios.get('https://backend-uas-pam-production.up.railway.app/api/product')
     .then((response) => {
       this.setState({ dataSource: response.data });
@@ -161,7 +154,7 @@ class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={home} style={{ width: 24.66, height: 22.58 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi', { username: this.state.username, shoes: this.state.dataSource })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={transaksi} style={{ width: 18, height: 24 }} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
