@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TextInput, FlatList, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState, state } from 'react';
+import axios from 'axios';
 
 import nikeAirMax from '../assets/NikeAir.png';
 import nikewaffle from '../assets/nikeWaffle.png';
@@ -11,60 +12,9 @@ import history from '../assets/history.png';
 import love from '../assets/love_press.png';
 import lovePress from '../assets/love_press.png';
 
-const shoesData = [
-  {
-    id: '1',
-    name: 'Nike Air Max Pre-Day SE',
-    price: 'Rp 2,329,000',
-    type: "Men's Shoes",
-    rating: '4/5',
-    image: nikeAirMax,
-  },
-  {
-    id: '2',
-    name: 'Nike Waffle One',
-    price: 'Rp 1,499,000',
-    type: "Woman's Shoes",
-    rating: '4.5/5',
-    image: nikewaffle,
-  },
-  {
-    id: '3',
-    name: 'Nike orange',
-    price: 'Rp 1,499,000',
-    type: "Men's Shoes",
-    rating: '5/5',
-    image: nikeDunkHigh,
-  },
-  {
-    id: '4',
-    name: 'Nike Air Max Pre-Day SE',
-    price: 'Rp 2,329,000',
-    type: "Men's Shoes",
-    rating: '4/5',
-    image: nikeAirMax,
-  },
-  {
-    id: '5',
-    name: 'Nike Waffle One',
-    price: 'Rp 1,499,000',
-    type: "Woman's Shoes",
-    rating: '4.5/5',
-    image: nikewaffle,
-  },
-  {
-    id: '6',
-    name: 'Nike orange',
-    price: 'Rp 1,499,000',
-    type: "Men's Shoes",
-    rating: '5/5',
-    image: nikeDunkHigh,
-  },
-];
-
 const renderItem = ({ item }) => (
   <View style={{ marginBottom: 10, marginLeft: 10, flexDirection: 'row' }}>
-    <ImageBackground source={item.image} style={{ width: 130, height: 110 }}>
+    <ImageBackground source={{ uri: item.image }} style={{ width: 130, height: 110 }}>
       <View style={{ backgroundColor: '#0D4C92', width: 70, height: 30, borderBottomLeftRadius: 50, borderTopRightRadius: 50, position: 'absolute', left: 50, flexDirection: 'row', justifyContent: 'flex-end' }}>
         <Image source={star} style={{ width: 18, height: 18, marginTop: 4 }} />
         <Text style={{ marginRight: 14, color: 'white', marginTop: 4 }}>{item.rating}</Text>
@@ -88,15 +38,32 @@ const renderItem = ({ item }) => (
 );
 
 class WishlistScreen extends React.Component {
-  state = {
-    screenText: 'press a button',
-  };
-  changeText = (text) => {
-    console.log(text + ' has been pressed');
-    this.setState({
-      screen: text,
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: this.props.route.params.username,
+      dataSource: [],
+      wishlist: [],
+    };
+  }
+
+  fetchData() {
+    axios.all([axios.get('https://backend-uas-pam-production.up.railway.app/api/product'), axios.get('https://backend-uas-pam-production.up.railway.app/api/wishlist/' + this.state.username)]).then((response) => {
+      this.setState({ dataSource: response[0].data, wishlist: response[1].data }).then(() => {
+        const result = this.state.dataSource.filter((el) => {
+          return this.state.wishlist.find((element) => {
+            return element == el.id;
+          });
+        });
+        this.setState({ dataSource: result });
+        console.log(this.state.dataSource);
+      });
     });
-  };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
 
   render() {
     return (
@@ -105,9 +72,12 @@ class WishlistScreen extends React.Component {
           <View style={{ marginLeft: 140, marginTop: 39 }}>
             <Text style={{ fontSize: 18, fontWeight: '700' }}>WISHLIST</Text>
           </View>
-          <TouchableOpacity style={{ marginTop: 26, marginRight: 24 }} onPress={() => {
+          <TouchableOpacity
+            style={{ marginTop: 26, marginRight: 24 }}
+            onPress={() => {
               this.props.navigation.navigate('Profile', { username: this.state.username });
-            }}>
+            }}
+          >
             <Image
               source={{
                 uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
@@ -118,7 +88,7 @@ class WishlistScreen extends React.Component {
         </View>
 
         <ScrollView style={{ marginTop: 20 }}>
-          <FlatList data={shoesData} renderItem={renderItem} keyExtractor={(item) => item.id} />
+          <FlatList data={this.state.dataSource} renderItem={renderItem} keyExtractor={(item) => item.id} />
         </ScrollView>
 
         <View style={styles.navContainer}>

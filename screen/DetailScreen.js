@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { View, Text, Button, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
-
+import axios from 'axios';
 import star from '../assets/star.png';
 import back from '../assets/btn_back.png';
 import love from '../assets/love.png';
@@ -8,7 +8,7 @@ import lovePress from '../assets/love_press.png';
 let num = 1;
 export default function DetailScreen({ route, navigation }) {
   const [color, setColor] = useState(true);
-  const { itemId, itemName, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct, itemGender } = route.params;
+  const { username, itemId, itemName, itemImage, itemRating, itemPrice, itemDetail, itemNameProduct, itemTypeProduct, itemGender } = route.params;
   return (
     <>
       {console.log(route)}
@@ -27,6 +27,19 @@ export default function DetailScreen({ route, navigation }) {
                 } else {
                   setColor(true);
                 }
+                axios
+                  .post('https://backend-uas-pam-production.up.railway.app/api/wishlist/' + username, {
+                    id: itemId,
+                  })
+                  .then((response) => {
+                    if (response.status === 200) {
+                      navigation.navigate('Wishlist', { username });
+                    }
+                  })
+                  .catch((e) => {
+                    alert('error woyy');
+                    console.error(e.message);
+                  });
               }}
             >
               <Image source={color ? love : lovePress} style={{ width: 27, height: 26 }} />
