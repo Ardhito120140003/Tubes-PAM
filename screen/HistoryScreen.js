@@ -73,17 +73,19 @@ class HistoryScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <View style={{ marginLeft: 140, marginTop: 65 }}>
+          <View style={{ marginLeft: 140, marginTop: 39 }}>
             <Text style={{ fontSize: 18, fontWeight: '700' }}>HISTORY</Text>
           </View>
-          <View style={{ marginTop: 50, marginRight: 24 }}>
+          <TouchableOpacity style={{ marginTop: 26, marginRight: 24 }} onPress={() => {
+              this.props.navigation.navigate('Profile', { username: this.state.username });
+            }}>
             <Image
               source={{
                 uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
               }}
               style={{ width: 50, height: 50, borderRadius: 50 }}
             />
-          </View>
+          </TouchableOpacity>
         </View>
 
         <ScrollView style={{ marginTop: 20 }}>

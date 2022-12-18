@@ -50,17 +50,19 @@ function TransactionScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View style={{ marginLeft: 135, marginTop: 65 }}>
+        <View style={{ marginLeft: 135, marginTop: 39 }}>
           <Text style={{ fontSize: 18, fontWeight: '700' }}>KERANJANG</Text>
         </View>
-        <View style={{ marginTop: 50, marginRight: 24 }}>
+        <TouchableOpacity style={{ marginTop: 26, marginRight: 24 }} onPress={() => {
+              this.props.navigation.navigate('Profile', { username: this.state.username });
+            }}>
           <Image
             source={{
               uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
             }}
             style={{ width: 50, height: 50, borderRadius: 50 }}
           />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <ScrollView style={{ marginTop: 20 }}>
@@ -69,7 +71,7 @@ function TransactionScreen({ route, navigation }) {
 
       <View>
         <TouchableOpacity onPress={null} style={styles.checkoutButton}>
-          <Text style={{ marginTop: 6, fontSize: 20, color: 'white', fontWeight: 'bold' }}>Checkout (6)</Text>
+          <Text style={{ marginTop: 6, fontSize: 20, color: 'white', fontWeight: 'bold' }}>Checkout</Text>
         </TouchableOpacity>
       </View>
 
@@ -109,7 +111,8 @@ const styles = StyleSheet.create({
     height: 39,
     bottom: 70,
     borderRadius: 15,
-    marginLeft: 60,
+    alignSelf:"center",
+    marginBottom:10
   },
   navContainer: {
     position: 'absolute',
