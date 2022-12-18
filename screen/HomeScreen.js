@@ -126,9 +126,11 @@ class HomeScreen extends React.Component {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => this.props.navigation.navigate('Seacrh')}>
-          <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder={'find your shoes'} />
-          <View style={{ marginTop: 35, marginRight: 24 }}>
+        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => this.props.navigation.navigate('Search')}>
+          <View style={styles.input}>
+            <Text style={{ color: '#7A7E86' }}>find your shoes</Text>
+          </View>
+          <View style={{ marginTop: 25, marginRight: 24 }}>
             <Feather name="search" size={20} color="black" style={{ marginLeft: 1 }} />
           </View>
         </TouchableOpacity>
