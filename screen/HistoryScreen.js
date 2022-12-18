@@ -76,9 +76,12 @@ class HistoryScreen extends React.Component {
           <View style={{ marginLeft: 140, marginTop: 39 }}>
             <Text style={{ fontSize: 18, fontWeight: '700' }}>HISTORY</Text>
           </View>
-          <TouchableOpacity style={{ marginTop: 26, marginRight: 24 }} onPress={() => {
+          <TouchableOpacity
+            style={{ marginTop: 26, marginRight: 24 }}
+            onPress={() => {
               this.props.navigation.navigate('Profile', { username: this.state.username });
-            }}>
+            }}
+          >
             <Image
               source={{
                 uri: 'https://cdn1-production-images-kly.akamaized.net/PRciRZRdN7B92z0m_gkHORceT1k=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4187840/original/046976900_1665479129-cepmek.jpg',
@@ -97,13 +100,13 @@ class HistoryScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={home} style={{ width: 24.66, height: 22.58 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={transaksi} style={{ width: 18, height: 24 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('History', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={history} style={{ width: 27, height: 27 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Wishlist')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Wishlist', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={love} style={{ width: 27, height: 27 }} />
             </TouchableOpacity>
           </View>

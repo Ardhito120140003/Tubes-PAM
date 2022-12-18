@@ -76,7 +76,6 @@ class WishlistScreen extends React.Component {
           dataSource: response[0].data,
           wishlist: response[1].data.wishItem,
         });
-        console.log(this.state.wishlist);
       })
       .then((response) => {
         const result = this.state.dataSource.filter((el) => {
@@ -126,13 +125,13 @@ class WishlistScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={home} style={{ width: 24.66, height: 22.58 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Transaksi', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={transaksi} style={{ width: 18, height: 24 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('History')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('History', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={history} style={{ width: 27, height: 27 }} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Wishlist')} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Wishlist', { username: this.state.username })} style={styles.icon} android_riple={{ borderless: true, radius: 50 }}>
               <Image source={lovePress} style={{ width: 27, height: 27 }} />
             </TouchableOpacity>
           </View>
